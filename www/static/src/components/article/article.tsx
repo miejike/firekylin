@@ -35,7 +35,7 @@ class Article extends React.Component<ArticleProps, {}> {
             pathname: false,
             title: false,
         },
-        autocompletePathname: !this.props.match.params.id
+        autocompletePathname: !this.props.match.params.id,
     };
 
     constructor(props: any) {
@@ -57,17 +57,17 @@ class Article extends React.Component<ArticleProps, {}> {
             sharedStore.getCategoryList$,
             sharedStore.getDefaultCategory$,
         );
-        merged$.subscribe(res => {
+        merged$.subscribe((res) => {
             sharedStore.setCategoryList(res[0].data);
             const defaultCategoryAry = res[0].data.filter(
-                cat => cat.id === +res[1].data,
+                (cat) => cat.id === +res[1].data,
             );
             articleStore.setArticleInfo({ cate: defaultCategoryAry });
         });
         // Get Tags
         sharedStore.getTagList();
         // Get Users
-        userStore.getUserList$().subscribe(res => {
+        userStore.getUserList$().subscribe((res) => {
             userStore.setUserList(res.data);
             articleStore.setArticleInfo({
                 user_id: userStore.userList.length > 0 ? userStore.userList[0].id : '',
@@ -110,10 +110,10 @@ class Article extends React.Component<ArticleProps, {}> {
         this.props.articleStore.setArticleInfo({ is_public: e.target.value });
     }
     // 封面图片
-    handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    handleImageChange(value: string) {
         this.props.articleStore.setArticleInfo({
             options: {
-                featuredImage: `${e.target.value}`,
+                featuredImage: value,
             },
         });
     }
@@ -176,7 +176,7 @@ class Article extends React.Component<ArticleProps, {}> {
         params.push_sites = articleInfo.options.push_sites;
 
         if (this.type === ArticleTypeEnum.POST) {
-            params.cate = articleInfo.cate.map(cate => cate.id);
+            params.cate = articleInfo.cate.map((cate) => cate.id);
             params.tag = articleInfo.tag;
             params.user_id = articleInfo.user_id;
         }
@@ -191,7 +191,7 @@ class Article extends React.Component<ArticleProps, {}> {
         localStorage.removeItem('unsavetype' + this.type + 'id' + params.id);
         // 保存
         const type = this.isPage() ? 'page' : 'post';
-        this.props.articleStore.articleSubmit(params, this.type).subscribe(res => {
+        this.props.articleStore.articleSubmit(params, this.type).subscribe((res) => {
             if (res.errno === 0) {
                 if (!params.id && res.data.id) {
                     params.id = res.data.id;
@@ -201,13 +201,13 @@ class Article extends React.Component<ArticleProps, {}> {
                     this.props.articleStore.getArticleInfoById(params.id, this.type);
                     message.success(
                         <>
-                            发布成功, &nbsp;&nbsp;
-                            <a
-                                href={`/${type}/${articleInfo.pathname}.html`}
+                            发布成功
+                            {/* <a
+                                href={`/${articleInfo.cate[0].pathname}/${params.id}`}
                                 target="_blank"
                             >
                                 {this.isPage() ? '点此查看页面' : '点此查看文章'}
-                            </a>
+                            </a> */}
                         </>,
                     );
                 } else {
@@ -220,25 +220,28 @@ class Article extends React.Component<ArticleProps, {}> {
     }
 
     handleTitle(e: React.ChangeEvent<HTMLInputElement>) {
-        const {autocompletePathname, hasError} = this.state;
+        const { autocompletePathname, hasError } = this.state;
         const nextHasError = Object.assign({}, hasError);
-        const {articleInfo, setArticleInfo} = this.props.articleStore;
+        const { articleInfo, setArticleInfo } = this.props.articleStore;
         const nextInfo = {
             title: e.target.value,
-            pathname: articleInfo.pathname
+            pathname: articleInfo.pathname,
         };
         hasError.title = false;
 
-        if(autocompletePathname && pinyin.isSupported()) {
+        if (autocompletePathname && pinyin.isSupported()) {
             let text = '';
             let lastToken;
-            const format = str => str ? str.toLowerCase() : '';
+            const format = (str) => (str ? str.toLowerCase() : '');
             const tokens = pinyin.parse(nextInfo.title);
-            tokens.forEach(v => {
-                if(v.type === 2) {
-                    text += text && !/\n|\s/.test(lastToken.target) ? '-' + format(v.target) : format(v.target)
+            tokens.forEach((v) => {
+                if (v.type === 2) {
+                    text +=
+                        text && !/\n|\s/.test(lastToken.target)
+                            ? '-' + format(v.target)
+                            : format(v.target);
                 } else {
-                    text += (lastToken && lastToken.type === 2 ? '-' : '') + v.target; 
+                    text += (lastToken && lastToken.type === 2 ? '-' : '') + v.target;
                 }
                 lastToken = v;
             });
@@ -247,7 +250,7 @@ class Article extends React.Component<ArticleProps, {}> {
             hasError.pathname = false;
         }
 
-        this.setState({hasError: nextHasError});
+        this.setState({ hasError: nextHasError });
         setArticleInfo(nextInfo);
     }
     handlePath(e: React.ChangeEvent<HTMLInputElement>) {
@@ -266,7 +269,7 @@ class Article extends React.Component<ArticleProps, {}> {
             create_time: articleInfo.create_time,
             update_time: moment().format('YYYY-MM-DD HH:mm:ss'),
             user: this.props.userStore.userList.filter(
-                user => +user.id === +articleInfo.user_id,
+                (user) => +user.id === +articleInfo.user_id,
             )[0],
             comment_num: 0,
             allow_comment: 0,
@@ -274,10 +277,10 @@ class Article extends React.Component<ArticleProps, {}> {
         };
 
         if (this.type === 0) {
-            previewData.tag = articleInfo.tag.map(tagName => {
+            previewData.tag = articleInfo.tag.map((tagName) => {
                 return (
                     this.props.sharedStore.tagList.filter(
-                        tag => tag.name === tagName,
+                        (tag) => tag.name === tagName,
                     )[0] || { name: tagName }
                 );
             });
@@ -328,7 +331,10 @@ class Article extends React.Component<ArticleProps, {}> {
                             type={this.type}
                             hasError={this.state.hasError}
                         />
-                        <ArticleEditor type={this.props.type} id={this.props.match.params.id} />
+                        <ArticleEditor
+                            type={this.props.type}
+                            id={this.props.match.params.id}
+                        />
                     </Col>
                     <Col span={6}>
                         <ArticleControlHeader
@@ -343,22 +349,22 @@ class Article extends React.Component<ArticleProps, {}> {
                                 format="YYYY-MM-DD HH:mm:ss"
                                 value={moment(articleInfo.create_time)}
                                 placeholder="请选择日期"
-                                onChange={date => this.onDateChange(date)}
+                                onChange={(date) => this.onDateChange(date)}
                             />
                         </section>
                         {this.isPage() ? null : (
                             <section className="category">
-                                <h5>分类</h5>
+                                <h5>栏目</h5>
                                 <ArticleControlCategory
                                     catInitial={
                                         articleInfo.cate && articleInfo.cate.length > 0
-                                            ? articleInfo.cate.map(item => item.id)
+                                            ? articleInfo.cate.map((item) => item.id)
                                             : []
                                     }
                                 />
                             </section>
                         )}
-                        {this.isPage() ? null : (
+                        {/* {this.isPage() ? null : (
                             <section className="category">
                                 <h5>标签</h5>
                                 <ArticleControlTag
@@ -369,14 +375,14 @@ class Article extends React.Component<ArticleProps, {}> {
                                     }
                                 />
                             </section>
-                        )}
+                        )} */}
                         {this.isPage() ? (
                             <section className="category">
                                 <h5>自定义模版</h5>
                                 <ArticleControlTemplate
                                     template={articleInfo.options.template}
                                     templateList={templateList}
-                                    handleTemplateChange={value =>
+                                    handleTemplateChange={(value) =>
                                         articleStore.setArticleInfo({
                                             options: { template: value },
                                         })
@@ -385,6 +391,15 @@ class Article extends React.Component<ArticleProps, {}> {
                             </section>
                         ) : null}
                         <section className="category">
+                            <h5>封面图片</h5>
+                            <ArticleControlImage
+                                imageUrl={articleInfo.options.featuredImage}
+                                handleImageChange={(value) =>
+                                    this.handleImageChange(value)
+                                }
+                            />
+                        </section>
+                        {/* <section className="category">
                             <h5>公开度</h5>
                             <ArticleControlPublic
                                 isPublic={articleInfo.is_public}
@@ -404,13 +419,7 @@ class Article extends React.Component<ArticleProps, {}> {
                                 允许评论
                             </Checkbox>
                         </section>
-                        <section className="category">
-                            <h5>封面图片</h5>
-                            <ArticleControlImage
-                                imageUrl={articleInfo.options.featuredImage}
-                                handleImageChange={e => this.handleImageChange(e)}
-                            />
-                        </section>
+                        
                         {this.isPage() || window.SysConfig.userInfo.type !== 1 ? null : (
                             <section className="category">
                                 <h5>选择作者</h5>
@@ -422,7 +431,7 @@ class Article extends React.Component<ArticleProps, {}> {
                                     }
                                 />
                             </section>
-                        )}
+                        )} */}
                     </Col>
                 </Row>
             </div>

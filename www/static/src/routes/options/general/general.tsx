@@ -15,7 +15,7 @@ class GeneralForm extends React.Component<GeneralProps, {}> {
     }
 
     componentDidMount() {
-        // 
+        //
     }
 
     handleSubmit = (e: React.FormEvent<any>) => {
@@ -25,18 +25,18 @@ class GeneralForm extends React.Component<GeneralProps, {}> {
                 this.props.generalStore.submit(values);
             }
         });
-    }
-    
-    handleChange = (info: UploadChangeParam, type: 'logo' | 'favicon') => {
+    };
+
+    handleChange = (info: UploadChangeParam, type: 'logo' | 'favicon' | 'header') => {
         if (info.file.status === 'uploading') {
-          this.setState({ loading: true });
-          return;
+            this.setState({ loading: true });
+            return;
         }
         if (info.file.status === 'done') {
-          this.setState({loading: false});
-          this.handleFile(info, type);
+            this.setState({ loading: false });
+            this.handleFile(info, type);
         }
-    }
+    };
 
     getBase64(img: any, callback: Function) {
         const reader = new FileReader();
@@ -44,23 +44,29 @@ class GeneralForm extends React.Component<GeneralProps, {}> {
         reader.readAsDataURL(img);
     }
 
-    handleFile(fileInfo: UploadChangeParam, type: 'logo' | 'favicon') {
+    handleFile(fileInfo: UploadChangeParam, type: 'logo' | 'favicon' | 'header') {
         if (fileInfo.file.response.errno !== 0) {
             message.error(fileInfo.file.response.errmsg);
         } else {
             const url = fileInfo.file.response.data;
             if (type === 'logo') {
                 this.props.form.setFieldsValue({
-                    logo_url: url
+                    logo_url: url,
                 });
                 window.SysConfig.options.logo_url = url;
-                this.props.generalStore.setData({options: window.SysConfig.options});
+                this.props.generalStore.setData({ options: window.SysConfig.options });
+            } else if (type === 'header') {
+                this.props.form.setFieldsValue({
+                    header_url: url,
+                });
+                window.SysConfig.options.header_url = url;
+                this.props.generalStore.setData({ options: window.SysConfig.options });
             } else {
                 this.props.form.setFieldsValue({
-                    favicon_url: url
+                    favicon_url: url,
                 });
                 window.SysConfig.options.favicon_url = url;
-                this.props.generalStore.setData({options: window.SysConfig.options});
+                this.props.generalStore.setData({ options: window.SysConfig.options });
             }
         }
     }
@@ -72,7 +78,7 @@ class GeneralForm extends React.Component<GeneralProps, {}> {
         }
         return isLt5M;
     }
-    
+
     render() {
         const { getFieldDecorator } = this.props.form;
         const formItemLayout = {
@@ -87,17 +93,18 @@ class GeneralForm extends React.Component<GeneralProps, {}> {
         };
         const tailFormItemLayout = {
             wrapperCol: {
-              xl: {
-                span: 16,
-                offset: 0,
-              }
+                xl: {
+                    span: 16,
+                    offset: 0,
+                },
             },
         };
 
         const { options } = window.SysConfig;
         const { loading } = this.props.generalStore;
-        const { logo_url, favicon_url } = options;
-        let [logoUrl, iconUrl] = [logo_url, favicon_url];
+        const { logo_url, favicon_url, header_url } = options;
+
+        let [logoUrl, iconUrl, headerUrl] = [logo_url, favicon_url, header_url];
         if (logoUrl && !logoUrl.includes('data:image')) {
             logoUrl += (logoUrl.includes('?') ? '&' : '?') + 'm=' + Date.now();
         }
@@ -106,160 +113,167 @@ class GeneralForm extends React.Component<GeneralProps, {}> {
         }
         const uploadButton = (
             <div>
-              <Icon type={this.props.generalStore.loading.logo ? 'loading' : 'plus'} />
-              <div className="ant-upload-text">Upload</div>
+                <Icon type={this.props.generalStore.loading.logo ? 'loading' : 'plus'} />
+                <div className="ant-upload-text">Upload</div>
             </div>
         );
-        
+
         return (
             <>
                 <BreadCrumb className="breadcrumb" {...this.props} />
                 <div className="options-general-page page-list">
                     <h3 className="page-title">基本设置</h3>
                     <Form onSubmit={this.handleSubmit}>
-                        <FormItem
-                            {...formItemLayout}
-                            label="站点名称"
-                        >
+                        <FormItem {...formItemLayout} label="站点名称">
                             {getFieldDecorator('title', {
-                                rules: [{
-                                    required: true, message: '请填写站点名称',
-                                }],
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: '请填写站点名称',
+                                    },
+                                ],
                                 initialValue: options.title,
-                            })(
-                                <Input />
-                            )}
+                            })(<Input />)}
                         </FormItem>
-                        <FormItem
-                            {...formItemLayout}
-                            label="LOGO 地址"
-                        >
+                        <FormItem {...formItemLayout} label="LOGO 地址">
                             <Upload
                                 name="file"
                                 listType="picture-card"
                                 accept=""
                                 className="avatar-uploader"
                                 showUploadList={false}
-                                style={{width: 140, height: 140}}
+                                style={{ width: 160, height: 40 }}
                                 action="/admin/api/file"
                                 beforeUpload={this.beforeUpload}
-                                onChange={e => this.handleChange(e, 'logo')}
+                                onChange={(e) => this.handleChange(e, 'logo')}
                             >
-                                {logoUrl ? <img src={logo_url} alt="avatar" /> : uploadButton}
+                                {logoUrl ? (
+                                    <img src={logo_url} alt="avatar" />
+                                ) : (
+                                    uploadButton
+                                )}
                             </Upload>
                             {getFieldDecorator('logo_url', {
                                 initialValue: logo_url,
                             })(
-                                    <Input onChange={e => {
-                                        window.SysConfig.options.logo_url = e.target.value;
-                                        this.props.generalStore.setData({options: window.SysConfig.options});
-                                    }} />
+                                <Input
+                                    onChange={(e) => {
+                                        window.SysConfig.options.logo_url =
+                                            e.target.value;
+                                        this.props.generalStore.setData({
+                                            options: window.SysConfig.options,
+                                        });
+                                    }}
+                                />,
                             )}
-                            <p>尺寸最好为 140x140px。</p>
+                            <p>尺寸最好为 200x50px。</p>
                         </FormItem>
-                        <FormItem
+                        {/* <FormItem
                             {...formItemLayout}
-                            label="站点描述"
+                            label="头图地址"
                         >
+                            <Upload
+                                name="file"
+                                listType="picture"
+                                accept=""
+                                className="avatar-uploader"
+                                style={{width: 160, height: 40}}
+                                action="/admin/api/file"
+                                beforeUpload={this.beforeUpload}
+                                onChange={e => this.handleChange(e, 'header')}
+                            >
+                                {headerUrl ? <img src={header_url} /> : uploadButton}
+                            </Upload>
+                        </FormItem> */}
+                        <FormItem {...formItemLayout} label="站点描述">
                             {getFieldDecorator('description', {
-                                rules: [{
-                                    required: true, message: '请填写站点描述',
-                                }],
-                                initialValue: options.description
-                            })(
-                                <Input />
-                            )}
+                                rules: [
+                                    {
+                                        required: true,
+                                        message: '请填写站点描述',
+                                    },
+                                ],
+                                initialValue: options.description,
+                            })(<Input />)}
                         </FormItem>
-                        <FormItem
-                            {...formItemLayout}
-                            label="网站地址"
-                        >
+                        <FormItem {...formItemLayout} label="网站地址">
                             {getFieldDecorator('site_url', {
-                                initialValue: options.site_url
-                            })(
-                                <Input />
-                            )}
+                                initialValue: options.site_url,
+                            })(<Input />)}
                         </FormItem>
-                        <FormItem
-                            {...formItemLayout}
-                            label="Favicon 地址"
-                        >
+                        <FormItem {...formItemLayout} label="Favicon 地址">
                             <Upload
                                 name="file"
                                 listType="picture-card"
                                 accept=".ico"
                                 className="avatar-uploader"
                                 showUploadList={false}
-                                style={{width: 140, height: 140}}
+                                style={{ width: 140, height: 140 }}
                                 action="/admin/api/file"
                                 beforeUpload={this.beforeUpload}
-                                onChange={e => this.handleChange(e, 'favicon')}
+                                onChange={(e) => this.handleChange(e, 'favicon')}
                             >
-                                {iconUrl ? <img src={favicon_url} alt="avatar" /> : uploadButton}
+                                {iconUrl ? (
+                                    <img src={favicon_url} alt="avatar" />
+                                ) : (
+                                    uploadButton
+                                )}
                             </Upload>
                             {getFieldDecorator('favicon_url', {
-                                initialValue: favicon_url
+                                initialValue: favicon_url,
                             })(
-                                <Input onChange={e => {
-                                    window.SysConfig.options.favicon_url = e.target.value;
-                                    this.props.generalStore.setData({options: window.SysConfig.options});
-                                }} />
+                                <Input
+                                    onChange={(e) => {
+                                        window.SysConfig.options.favicon_url =
+                                            e.target.value;
+                                        this.props.generalStore.setData({
+                                            options: window.SysConfig.options,
+                                        });
+                                    }}
+                                />,
                             )}
-                            <p>尺寸最好为 128x128px。</p>                            
+                            <p>尺寸最好为 128x128px。</p>
                         </FormItem>
-                        <FormItem
-                            {...formItemLayout}
-                            label="关键词"
-                        >
+                        <FormItem {...formItemLayout} label="关键词">
                             {getFieldDecorator('keywords', {
-                                initialValue: options.keywords
-                            })(
-                                <Input />
-                            )}
+                                initialValue: options.keywords,
+                            })(<Input />)}
                             <p>请以半角逗号 "," 分割多个关键字.</p>
                         </FormItem>
-                        <FormItem
-                            {...formItemLayout}
-                            label="GitHub 地址"
-                        >
+                        <FormItem {...formItemLayout} label="关键词">
+                            {getFieldDecorator('keywords', {
+                                initialValue: options.keywords,
+                            })(<Input />)}
+                            <p>请以半角逗号 "," 分割多个关键字.</p>
+                        </FormItem>
+                        {/* <FormItem {...formItemLayout} label="GitHub 地址">
                             {getFieldDecorator('github_url', {
-                                initialValue: options.github_url
-                            })(
-                                <Input />
-                            )}
+                                initialValue: options.github_url,
+                            })(<Input />)}
                         </FormItem>
-                        <FormItem
-                            {...formItemLayout}
-                            label="Twitter 地址"
-                        >
+                        <FormItem {...formItemLayout} label="Twitter 地址">
                             {getFieldDecorator('twitter_url', {
-                                initialValue: options.twitter_url
-                            })(
-                                <Input />
-                            )}
-                        </FormItem>
-                        <FormItem
-                            {...formItemLayout}
-                            label="网站工信部备案号"
-                        >
+                                initialValue: options.twitter_url,
+                            })(<Input />)}
+                        </FormItem> */}
+                        <FormItem {...formItemLayout} label="网站工信部备案号">
                             {getFieldDecorator('miitbeian', {
-                                initialValue: options.miitbeian
-                            })(
-                                <Input />
-                            )}
+                                initialValue: options.miitbeian,
+                            })(<Input />)}
                         </FormItem>
-                        <FormItem
-                            {...formItemLayout}
-                            label="网站公安部备案号"
-                        >
+                        <FormItem {...formItemLayout} label="网站公安部备案号">
                             {getFieldDecorator('mpsbeian', {
-                                initialValue: options.mpsbeian
-                            })(
-                                <Input />
-                            )}
+                                initialValue: options.mpsbeian,
+                            })(<Input />)}
                         </FormItem>
                         <FormItem {...tailFormItemLayout}>
-                            <Button type="primary" htmlType="submit" loading={loading.submit}>提交</Button>
+                            <Button
+                                type="primary"
+                                htmlType="submit"
+                                loading={loading.submit}
+                            >
+                                提交
+                            </Button>
                         </FormItem>
                     </Form>
                 </div>

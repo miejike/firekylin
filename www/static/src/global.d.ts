@@ -14,6 +14,7 @@ interface Window {
             themeConfig: any;
             navigation: Array<any>;
             logo_url: string;
+            header_url: string;
             favicon_url: string;
             description: string;
             site_url: string;

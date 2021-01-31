@@ -62,7 +62,7 @@ module.exports = [
   {
     handle: 'router',
     options: {
-      prefix: ['/']
+      prefix: ['/'],
     }
   },
   {

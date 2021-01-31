@@ -37,7 +37,7 @@ class ArticleHeaderForm extends React.Component<any, {}> {
                         )}
                     </FormItem>
                 </div>
-                <div className="article-header-pathname">
+                {/* <div className="article-header-pathname">
                     <span>{baseUrl}</span>
                     <Input 
                         className={classNames('pathname-input', {'has-error': this.props.hasError.pathname})} 
@@ -54,7 +54,7 @@ class ArticleHeaderForm extends React.Component<any, {}> {
                     <a title="预览" style={{marginLeft: 8}} onClick={() => this.props.preview()}>
                         <span className="glyphicon glyphicon-eye-open" />
                     </a>
-                </div>
+                </div> */}
             </div>
         );
     }

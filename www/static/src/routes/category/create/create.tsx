@@ -1,16 +1,22 @@
 import * as React from 'react';
 import BreadCrumb from '../../../components/breadcrumb';
-import { Form, Input, Button, Select } from 'antd';
+import { Form, Input, Button, Select, Upload, Icon, message } from 'antd';
 import { inject, observer } from 'mobx-react';
 import { CategoryCreateProps } from './create.model';
+import { UploadChangeParam } from 'antd/lib/upload';
 const FormItem = Form.Item;
 const Option = Select.Option;
 @inject('categoryStore', 'sharedStore')
 @observer
 class CategoryCreateForm extends React.Component<CategoryCreateProps, {}> {
+    options: {
+        cover?: string
+    };
 
     constructor(props: CategoryCreateProps) {
         super(props);
+
+        this.options = {};
     }
 
     componentDidMount() {
@@ -39,6 +45,34 @@ class CategoryCreateForm extends React.Component<CategoryCreateProps, {}> {
         });
     }
 
+    handleChange = (info: UploadChangeParam) => {
+        if (info.file.status === 'uploading') {
+          this.setState({ loading: true });
+          return;
+        }
+        if (info.file.status === 'done') {
+          this.setState({loading: false});
+          this.handleFile(info);
+        }
+    }
+
+    handleFile(fileInfo: UploadChangeParam) {
+        if (fileInfo.file.response.errno !== 0) {
+            message.error(fileInfo.file.response.errmsg);
+        } else {
+            const url = fileInfo.file.response.data;
+            this.options.cover = url;
+        }
+    }
+
+    beforeUpload(file: File) {
+        const isLt5M = file.size / 1024 / 1024 < 5;
+        if (!isLt5M) {
+            message.error('图片必须小于5MB!');
+        }
+        return isLt5M;
+    }
+
     handleSubmit = (e: React.FormEvent<any>) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -46,7 +80,7 @@ class CategoryCreateForm extends React.Component<CategoryCreateProps, {}> {
                 const { createCategory, updateCategory } = this.props.categoryStore;
                 const id = this.props.match.params.id;
                 if (id) {
-                    updateCategory(id, Object.assign({}, values))
+                    updateCategory(id, Object.assign({}, values, {options: JSON.stringify(this.options)}))
                     .subscribe(
                         res => {
                             if (res.errno === 0) {
@@ -55,7 +89,7 @@ class CategoryCreateForm extends React.Component<CategoryCreateProps, {}> {
                         }
                     );
                 } else {
-                    createCategory(Object.assign({}, values))
+                    createCategory(Object.assign({}, values, {options: JSON.stringify(this.options)}))
                     .subscribe(
                         res => {
                             if (res.errno === 0) {
@@ -89,6 +123,12 @@ class CategoryCreateForm extends React.Component<CategoryCreateProps, {}> {
               }
             },
         };
+        const uploadButton = (
+            <div>
+              <Icon type="plus" />
+              <div className="ant-upload-text">Upload</div>
+            </div>
+        );
         
         const { rootCategoryList, categoryInfo } = this.props.categoryStore;
         return (
@@ -118,6 +158,21 @@ class CategoryCreateForm extends React.Component<CategoryCreateProps, {}> {
                             })(
                                 <Input />
                             )}
+                        </FormItem>
+                        <FormItem
+                            {...formItemLayout}
+                            label="封面图片"
+                        >
+                            <Upload
+                                name="file"
+                                listType="picture"
+                                accept=""
+                                action="/admin/api/file"
+                                beforeUpload={this.beforeUpload}
+                                onChange={e => this.handleChange(e)}
+                            >
+                                {uploadButton}
+                            </Upload>
                         </FormItem>
                         <FormItem
                             {...formItemLayout}

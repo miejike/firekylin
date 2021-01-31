@@ -5,11 +5,9 @@ import Article from '../../../components/article/article';
 import { PostProps } from '../post.model';
 import { ArticleTypeEnum } from '../../../enums/article-type.enum';
 
-interface PostCreateProps extends PostProps {
-}
+interface PostCreateProps extends PostProps {}
 
 class PostCreate extends React.Component<PostCreateProps, {}> {
-
     constructor(props: PostCreateProps) {
         super(props);
     }

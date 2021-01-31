@@ -4,6 +4,23 @@ module.exports = class extends think.Model {
     return +postsListSize;
   }
 
+  async getCateByName(pathname) {
+    const {options: optionsStr, ...rest} = await this.where({pathname}).find();
+
+    try {
+        const options = JSON.parse(optionsStr)
+        return {
+            ...rest,
+            options
+        }
+    } catch (error) {
+        return {
+            ...rest,
+            options: {}
+        }
+    }
+  }
+
   async getCateArchive() {
     const cates = {};
     const catesData = await this.select();

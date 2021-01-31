@@ -1,0 +1,27 @@
+{% extends './comm/layout.html' %}
+
+{% block content %}
+{% include './comm/top.html' %}
+
+<div class="container pages">    
+	 <!-- 列表内容 -->
+     <ul>
+        <!-- TODO 遍历新闻列表 -->
+        <li class="lh-3 border-bottom-dashed">
+            <i class="fa fa-gg"></i>
+            <a href="详情连接">
+                <span class="d-none d-md-inline">pc端链接</span><!-- PC端 -->
+                <span class="d-inline d-md-none">移动端链接</span><!-- 移动端 -->
+                    <span class="badge badge-danger">置顶</span>
+                    <span class="badge badge-warning">推荐</span>
+                    <span class="badge badge-info">头条</span>
+                <span class="float-right">xxxx年xx月xx日</span>
+            </a>
+        </li>
+    </ul>
+    
+    {% include './comm/page.html' %}
+ 	
+</div>
+
+{% endblock %}

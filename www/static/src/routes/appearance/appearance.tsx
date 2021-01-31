@@ -10,10 +10,10 @@ export default class Appearance extends React.Component<AppearanceProps, any> {
         return (
             <>
                 <Switch>
-                    <Route path={`${match.path}/theme`} component={Theme}/>
-                    <Route path={`${match.path}/navigation`} component={Navigation}/>
-                    <Route path={`${match.path}/edit`} component={Edit}/>
-                    <Redirect to={`${match.path}/theme`}/>
+                    <Route path={`${match.path}/theme`} component={Theme} />
+                    <Route path={`${match.path}/navigation`} component={Navigation} />
+                    <Route path={`${match.path}/edit`} component={Edit} />
+                    <Redirect to={`${match.path}/navigation`} />
                 </Switch>
             </>
         );

@@ -1,0 +1,173 @@
+{% extends './comm/layout.html' %} {% block content %} {# 幻灯片 #}
+<div class="swiper-container banner">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+            <a href="">
+                <img
+                    src="/theme/{{options.theme}}/images/b1.jpg"
+                    class="d-block w-100 h-min-230px"
+                />
+            </a>
+            <div class="container">
+                <div class="position-absolute text-light" style="top: 30%">
+                    <h1 class="fs-20 fs-sm-32 wow slideInUp">欢迎关注中环国信官网</h1>
+                    <h4 class="fs-14 fs-sm-20 wow slideInUp"></h4>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-slide">
+            <a href="">
+                <img
+                    src="/theme/{{options.theme}}/images/b2.jpg"
+                    class="d-block w-100 h-min-230px"
+                />
+            </a>
+            <div class="container">
+                <div class="position-absolute text-light" style="top: 30%">
+                    <h1 class="fs-20 fs-sm-32 wow slideInUp"></h1>
+                    <h4 class="fs-14 fs-sm-20 wow slideInUp"></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# 左箭头 #} {#
+    <div class="swiper-button-prev d-none d-md-block"></div>
+    #} {# 右箭头 #} {#
+    <div class="swiper-button-next d-none d-md-block"></div>
+    #}
+    <div class="swiper-pagination"></div>
+</div>
+
+{# 关于我们 #}
+<div class="bg-white py-5">
+    <div class="container">
+        <div class="text-center fs-26 fs-sm-28 wow fadeInDown">
+            <strong><span class="primary">关于</span>我们</strong>
+        </div>
+        <div
+            class="text-center fs-14 fs-sm-12 mb-5 text-secondary wow fadeInUp"
+            data-wow-delay="1s"
+        >
+            ABOUT US
+        </div>
+        <div class="text-sm-center" style="line-height: 2; color: #595959">
+            中环国信是一家专注于长期结构性价值投资的投资机构，由业界一批深耕行业的价值投资人联合创立。自成立以来，中环国信已在
+            科技创新、企业服务、先进制造、金融科技、文化旅游、生命健康等领域内进行了多项产业整合和投资布局
+            并持续寻找优秀的初创企业，力求精准抓取中国经济转型发展中涌现的投资机会。
+        </div>
+    </div>
+</div>
+
+{# 核心优势 #}
+<div class="bg-light py-5">
+    <div class="container">
+        <div class="text-center fs-26 fs-sm-28 wow fadeInDown">
+            <strong>核心<span class="primary">优势</span></strong>
+        </div>
+        <div
+            class="text-center fs-14 fs-sm-12 mb-5 text-secondary wow fadeInUp"
+            data-wow-delay="1s"
+        >
+            CORE ADVANTAGE
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-lg-4 mb-3 wow fadeInUp" data-wow-delay="500ms">
+                <div class="media mb-3">
+                    <div class="iconfont icon_shili fs-40 fs-sm-70 lh-1"></div>
+                    <div style="padding: 0 20px">
+                        <h5>深耕投资行业</h5>
+                        <p>
+                            <span class="text-secondary lh-2">目光精准，实力雄厚</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 mb-3 wow fadeInUp" data-wow-delay="500ms">
+                <div class="media mb-3">
+                    <div class="media-body" style="display: flex">
+                        <div class="iconfont icon_renmai fs-40 fs-sm-70 lh-1"></div>
+                        <div style="padding: 0 20px">
+                            <h5>行业垂直基金</h5>
+                            <p>
+                                <span class="text-secondary lh-2"
+                                    >资源丰富，人脉广泛</span
+                                >
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4 mb-3 wow fadeInUp" data-wow-delay="500ms">
+                <div class="media mb-3">
+                    <div class="media-body" style="display: flex">
+                        <div class="iconfont icon_juece fs-40 fs-sm-70 lh-1"></div>
+                        <div style="padding: 0 20px">
+                            <h5>深悉文化产业</h5>
+                            <p>
+                                <span class="text-secondary lh-2"
+                                    >业务多元，决策高效</span
+                                >
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# 团队介绍 #}
+<div class="bg-white py-5">
+    <div class="container content">
+        <div class="text-center fs-26 fs-sm-28 wow fadeInDown">
+            <strong><span class="primary">团队</span>介绍</strong>
+        </div>
+        <div
+            class="text-center fs-14 fs-sm-12 mb-5 text-secondary wow fadeInUp"
+            data-wow-delay="1s"
+        >
+            TEAM
+        </div>
+        <div class="row">
+            {% for team in teams %}
+            <div class="col-12 col-lg-4 mb-4 pb-4 wow fadeInUp" data-wow-duration="1.5s">
+                <img
+                    class="img-h-fit"
+                    src="{{JSON.parse(team.options).featuredImage}}"
+                    alt=""
+                />
+                <div class="fs-sm-16 fs-14 lh-sm-2">{{team.title}}</div>
+                <div class="fs-14 fs-sm-12 text-secondary">{{team.summary | safe}}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script src="/theme/{{options.theme}}/swiper-4.3.5/js/swiper.min.js"></script>
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        direction: 'horizontal',
+        loop: true,
+        speed: 1500,
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
+        },
+
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+
+        // 如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
+
+{% endblock %}

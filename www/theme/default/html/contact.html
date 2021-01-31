@@ -1,0 +1,12 @@
+{% extends './comm/layout.html' %}
+
+{% block content %}
+
+{% include './comm/top.html' %}
+
+<div class="container pages">
+	<h2 class="text-center fs-sm-28 fs-24">{content:title}</h2>
+	<div class="content mb-3">{content:content}</div>
+</div>
+
+{% endblock %}
