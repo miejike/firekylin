@@ -1,0 +1,15 @@
+{% extends './comm/main.html' %} {% block content %}
+<h2 class="fs-sm-30 fs-14 pb-4 border-bottom-solid">{{options.title}}</h2>
+<div class="content fs-14">
+    {% for publicInfo in publics %}
+    <div class="mb-4 wow section {{ "fadeInRight" if loop.index % 2 !== 0 else "fadeInLeft" }}"  data-wow-duration="1.5s">
+        <div>
+            <div class="fs-sm-24 fs-14 primary">{{publicInfo.title}}</div>
+            <p>
+                {{publicInfo.summary | safe}}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

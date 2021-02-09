@@ -55,6 +55,7 @@ module.exports = class extends Base {
       think.logger.info('LDAP', 'VERIFY TYPE');
       userInfo = await this.ldapVerify(username, ldapConfig);
     } else {
+      console.log('xxxxxxxx')
       think.logger.info('NORMAL', 'VERIFY TYPE');
       userInfo = await this.normalVerify(username);
     }
@@ -211,6 +212,7 @@ module.exports = class extends Base {
   async normalVerify(username) {
     //校验帐号和密码
     let userModel = this.model('user');
+	  console.log(username)
     let userInfo = await userModel.where({ name: username }).find();
     if (think.isEmpty(userInfo)) {
       return this.fail('ACCOUNT_ERROR');
@@ -218,6 +220,7 @@ module.exports = class extends Base {
 
     //校验密码
     let password = this.post('password');
+	 console.log(password, JSON.stringify(userInfo))
     if (!userModel.checkPassword(userInfo, password)) {
       return this.fail('ACCOUNT_ERROR');
     }

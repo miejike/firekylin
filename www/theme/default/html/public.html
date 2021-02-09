@@ -1,0 +1,8 @@
+{% extends './comm/layout.html' %} {% block content %} {% include './comm/top.html' %}
+
+<div class="container pages">
+    <div class="fs-sm-24 fs-14 py-4 text-center">{{publicInfo.title}}</div>
+    <div class="fs-14 fs-sm-16">{{publicInfo.content | safe}}</div>
+</div>
+
+{% endblock %}

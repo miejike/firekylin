@@ -185,6 +185,28 @@ module.exports = class extends (
     }
 
     /**
+     * 公益事业页面
+     */
+    async publicAction() {
+        let pathname = this.get('pathname');
+        let postModel = this.model('post');
+        
+        if (!pathname) {
+            let cateModel = this.model('cate');
+            let { id } = await cateModel.getCateByName('public');
+            let publics = await postModel.getPostByCate(id);
+
+            this.assign('publics', publics);
+            return this.displayView('publiclist');
+        }
+
+        let publicInfo = await postModel.getPostById(pathname);
+
+        this.assign('publicInfo', publicInfo);
+        return this.displayView('public');
+    }
+
+    /**
      * 团队介绍页面
      */
     async teamAction() {
@@ -196,15 +218,11 @@ module.exports = class extends (
             let { id } = await cateModel.getCateByName('team');
             let teams = await postModel.getPostByCate(id);
 
-            console.log(teams);
-
             this.assign('teams', teams);
             return this.displayView('teamlist');
         }
 
         let team = await postModel.getPostById(pathname);
-
-        console.log(team);
 
         this.assign('team', team);
         return this.displayView('team');

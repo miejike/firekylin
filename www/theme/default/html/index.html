@@ -10,8 +10,8 @@
             </a>
             <div class="container">
                 <div class="position-absolute text-light" style="top: 30%">
-                    <h1 class="fs-20 fs-sm-32 wow slideInUp">欢迎关注中环国信官网</h1>
-                    <h4 class="fs-14 fs-sm-20 wow slideInUp"></h4>
+		    {# <h1 class="fs-20 fs-sm-32 wow slideInUp">欢迎关注中环国信官网</h1>
+		    <h4 class="fs-14 fs-sm-20 wow slideInUp"></h4>#}
                 </div>
             </div>
         </div>
@@ -70,10 +70,10 @@
         >
             CORE ADVANTAGE
         </div>
-
-        <div class="row">
+        
+	<div class="row" onClick="(function() {window.location.href = '/advantage'})()">
             <div class="col-12 col-lg-4 mb-3 wow fadeInUp" data-wow-delay="500ms">
-                <div class="media mb-3">
+                <div class="media mb-3" style="justify-content: center">
                     <div class="iconfont icon_shili fs-40 fs-sm-70 lh-1"></div>
                     <div style="padding: 0 20px">
                         <h5>深耕投资行业</h5>
@@ -84,8 +84,7 @@
                 </div>
             </div>
             <div class="col-12 col-lg-4 mb-3 wow fadeInUp" data-wow-delay="500ms">
-                <div class="media mb-3">
-                    <div class="media-body" style="display: flex">
+                <div class="media mb-3" style="justify-content: center">
                         <div class="iconfont icon_renmai fs-40 fs-sm-70 lh-1"></div>
                         <div style="padding: 0 20px">
                             <h5>行业垂直基金</h5>
@@ -95,12 +94,10 @@
                                 >
                             </p>
                         </div>
-                    </div>
                 </div>
             </div>
             <div class="col-12 col-lg-4 mb-3 wow fadeInUp" data-wow-delay="500ms">
-                <div class="media mb-3">
-                    <div class="media-body" style="display: flex">
+                <div class="media mb-3" style="justify-content: center">
                         <div class="iconfont icon_juece fs-40 fs-sm-70 lh-1"></div>
                         <div style="padding: 0 20px">
                             <h5>深悉文化产业</h5>
@@ -110,7 +107,6 @@
                                 >
                             </p>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -131,7 +127,7 @@
         </div>
         <div class="row">
             {% for team in teams %}
-            <div class="col-12 col-lg-4 mb-4 pb-4 wow fadeInUp" data-wow-duration="1.5s">
+	    <div class="col-12 col-lg-4 mb-4 pb-4 wow fadeInUp" data-wow-duration="1.5s" onclick="(function() { window.location.href = '/team/{{team.post_id}}' })()">
                 <img
                     class="img-h-fit"
                     src="{{JSON.parse(team.options).featuredImage}}"
@@ -141,6 +137,55 @@
                 <div class="fs-14 fs-sm-12 text-secondary">{{team.summary | safe}}</div>
             </div>
             {% endfor %}
+        </div>
+    </div>
+</div>
+
+{# 公益事业 #}
+<div class="bg-light py-5">
+    <div class="container content">
+        <div class="text-center fs-26 fs-sm-28 wow fadeInDown">
+            <strong>公益<span class="primary">事业</span></strong>
+        </div>
+        <div
+            class="text-center fs-14 fs-sm-12 mb-5 text-secondary wow fadeInUp"
+            data-wow-delay="1s"
+        >
+            PUBLIC WELFARE
+        </div>
+        <div class="row" onClick="(function() {window.location.href = '/public'})()">
+            <div class="col-12 col-lg-3 mb-3 wow fadeInUp" data-wow-duration="500ms">
+                <div class="media mb-3" style="justify-content: center; align-items: center;">
+                    <div class="iconfont icon_edu fs-40 fs-sm-70 lh-1"></div>
+                    <div style="padding: 0 20px">
+                        <h5>教育资助类公益</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3 mb-3 wow fadeInUp" data-wow-duration="500ms">
+                <div class="media mb-3" style="justify-content: center; align-items: center;">
+                    <div class="iconfont icon_talents fs-40 fs-sm-70 lh-1"></div>
+                    <div style="padding: 0 20px">
+                        <h5>人才建设类公益</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3 mb-3 wow fadeInUp" data-wow-duration="500ms">
+                <div class="media mb-3" style="justify-content: center; align-items: center;">
+                    <div class="iconfont icon_protect fs-40 fs-sm-70 lh-1"></div>
+                    <div style="padding: 0 20px">
+                        <h5>女性维权类公益</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3 mb-3 wow fadeInUp" data-wow-duration="500ms">
+                <div class="media mb-3" style="justify-content: center; align-items: center;">
+                    <div class="iconfont icon_medical fs-40 fs-sm-70 lh-1"></div>
+                    <div style="padding: 0 20px">
+                        <h5>医疗健康类公益</h5>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

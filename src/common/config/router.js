@@ -13,6 +13,8 @@ module.exports = [
     [/^advantage\/?$/i, 'post/advantage'],
     [/^team\/([^/]+)\/?$/i, 'post/team?pathname=:1'],
     [/^team\/?$/i, 'post/team'],
+    [/^public\/([^/]+)\/?$/i, 'post/public?pathname=:1'],
+    [/^public\/?$/i, 'post/public'],
     [/^news\/?$/i, 'post/news'],
     [/^product\/([^/]+)\/?$/i, 'post/product?pathname=:1'],
     [/^product\/?$/i, 'post/product'],
