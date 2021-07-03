@@ -12,22 +12,22 @@ npm install
 npm start
 ```
 
-## aliyun配置(Centos)
+## aliyun 配置(Centos)
 
-### 安装Node.js
+### 安装 Node.js
 
 ```
 curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
 sudo yum install -y nodejs
 ```
 
-### 安装pm2
+### 安装 pm2
 
 ```
 npm install pm2 -g
 ```
 
-### 安装MySQL
+### 安装 MySQL
 
 ```
 wget http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm &&
@@ -47,7 +47,7 @@ yum module disable mysql
 yum -y install mysql-community-server
 ```
 
-#### 启动MySQL
+#### 启动 MySQL
 
 ```
 systemctl start mysqld.service
@@ -59,7 +59,7 @@ systemctl start mysqld.service
 grep "password" /var/log/mysqld.log
 ```
 
-#### 登录MySQL
+#### 登录 MySQL
 
 ```
 mysql -uroot -p
@@ -72,13 +72,13 @@ set global validate_password_policy=0;  #修改密码安全策略为低（只校
 ALTER USER 'root'@'localhost' IDENTIFIED BY '12345678'; #12345678为新密码
 ```
 
-### 安装Git
+### 安装 Git
 
 ```
 yum install git
 ```
 
-### Clone项目
+### Clone 项目
 
 ### 安装程序依赖
 
@@ -107,7 +107,7 @@ cp pm2_default.json pm2.json
      "node_args": [],
      "args": [],
      "env": {
- 
+
      }
    }]
 }
@@ -119,13 +119,13 @@ cp pm2_default.json pm2.json
 pm2 startOrReload pm2.json
 ```
 
-### 安装Nginx
+### 安装 Nginx
 
 ```
 yum install nginx -y
 ```
 
-### 配置Nginx
+### 配置 Nginx
 
 ```
 server {
@@ -241,5 +241,10 @@ ln -s /root/firekylin/nginx.conf /etc/nginx/conf.d/firekylin.conf
 service nginx restart
 ```
 
+### 新增页面
+
+1. router（`src/common/config/router.js`）文件添加对应路由信息
+
+2. controller（`src/home/controller/post.js`）文件添加对应 controller
 
 [更多内容](https://github.com/miejike/firekylin)
