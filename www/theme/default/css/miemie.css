@@ -104,7 +104,7 @@ ul {
     position: absolute;
     top: 0;
     bottom: 0;
-    right: 0;
+    right: -5px;
     content: '';
 }
 .content-image {
@@ -748,6 +748,11 @@ a.page-num:hover,
     height: 500px;
 }
 
+.flex-item {
+    justify-content: center;
+    align-items: center;
+}
+
 /*sm屏幕以上*/
 @media only screen and (min-width: 576px) {
     /*行距*/
@@ -1251,6 +1256,10 @@ a.page-num:hover,
         height: 300px;
         object-fit: cover;
         object-position: top;
+        transition: transform 0.3s linear;
+    }
+    .img-h-fit:hover {
+        transform: scale(1.1) !important;
     }
 }
 
@@ -1506,4 +1515,24 @@ a.page-num:hover,
     .top {
         text-align: left;
     }
+    .flex-item {
+        justify-content: space-around;
+        align-items: center;
+    }
+}
+
+.text-overflow {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.text-overflow p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.clickable {
+    cursor: pointer;
 }

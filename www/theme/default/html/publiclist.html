@@ -1,5 +1,5 @@
 {% extends './comm/main.html' %} {% block content %}
-<h2 class="fs-sm-30 fs-14 pb-4 border-bottom-solid">{{options.title}}</h2>
+<h2 class="fs-sm-30 fs-14 pb-4 border-bottom-solid">{{section_name}}</h2>
 <div class="content fs-14">
     {% for publicInfo in publics %}
     <div class="mb-4 wow section {{ "fadeInRight" if loop.index % 2 !== 0 else "fadeInLeft" }}"  data-wow-duration="1.5s">

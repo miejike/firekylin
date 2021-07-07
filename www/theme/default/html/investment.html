@@ -1,0 +1,14 @@
+{% extends './comm/main.html' %} {% block content %}
+<h2 class="fs-sm-30 fs-14 pb-4 border-bottom-solid">{{section_name}}</h2>
+<div class="content fs-14">
+    {% for investment in investments %}
+    <div class="mb-4 wow fadeInRight section">
+        <!-- <div class=""></div> -->
+        <div>
+            <div class="fs-sm-24 fs-14 primary">{{investment.title}}</div>
+            <p>{{investment.summary | safe}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

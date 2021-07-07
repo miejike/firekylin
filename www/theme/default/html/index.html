@@ -10,8 +10,10 @@
             </a>
             <div class="container">
                 <div class="position-absolute text-light" style="top: 30%">
-		    {# <h1 class="fs-20 fs-sm-32 wow slideInUp">欢迎关注中环国信官网</h1>
-		    <h4 class="fs-14 fs-sm-20 wow slideInUp"></h4>#}
+                    {#
+                    <h1 class="fs-20 fs-sm-32 wow slideInUp">欢迎关注中环国信官网</h1>
+                    <h4 class="fs-14 fs-sm-20 wow slideInUp"></h4>
+                    #}
                 </div>
             </div>
         </div>
@@ -38,103 +40,169 @@
     <div class="swiper-pagination"></div>
 </div>
 
-{# 关于我们 #}
+{# 集团概览 #}
 <div class="bg-white py-5">
     <div class="container">
-        <div class="text-center fs-26 fs-sm-28 wow fadeInDown">
-            <strong><span class="primary">关于</span>我们</strong>
+        <div class="text-center fs-26 fs-sm-28 mb-5 wow fadeInDown">
+            <strong
+                ><span class="primary">{{i18n.t('集团')}}</span
+                >{{i18n.t('概览')}}</strong
+            >
         </div>
-        <div
+        <!-- <div
             class="text-center fs-14 fs-sm-12 mb-5 text-secondary wow fadeInUp"
             data-wow-delay="1s"
         >
-            ABOUT US
-        </div>
+            Group Overview
+        </div> -->
         <div class="text-sm-center" style="line-height: 2; color: #595959">
-            中环国信是一家专注于长期结构性价值投资的投资机构，由业界一批深耕行业的价值投资人联合创立。自成立以来，中环国信已在
-            科技创新、企业服务、先进制造、金融科技、文化旅游、生命健康等领域内进行了多项产业整合和投资布局
-            并持续寻找优秀的初创企业，力求精准抓取中国经济转型发展中涌现的投资机会。
+            中轴线数字股份有限公司及中轴线投资基金有限公司（简称“中轴线”）成立于2015年6月23日，是一家有使命感和专注于价值投资的机构；也是一家致力于产业振兴和发展以及新兴市场引进的集团公司。我们的核心业务包括私募股权投资，资产管理，特殊机会投资。
         </div>
     </div>
 </div>
 
-{# 核心优势 #}
+{# 价值观 #}
 <div class="bg-light py-5">
     <div class="container">
         <div class="text-center fs-26 fs-sm-28 wow fadeInDown">
-            <strong>核心<span class="primary">优势</span></strong>
+            <strong>{{i18n.t('价值观')}}</strong>
         </div>
         <div
             class="text-center fs-14 fs-sm-12 mb-5 text-secondary wow fadeInUp"
             data-wow-delay="1s"
         >
-            CORE ADVANTAGE
+            There is no problem too difficult, no price too great. Duty first, value
+            second, and good business is always about remanaging order.
         </div>
-        
-	<div class="row" onClick="(function() {window.location.href = '/advantage'})()">
-            <div class="col-12 col-lg-4 mb-3 wow fadeInUp" data-wow-delay="500ms">
-                <div class="media mb-3" style="justify-content: center">
+
+        <h5 style="text-align: center" class="mb-5 wow fadeInUp" data-wow-delay="500ms">
+            <span class="primary">{{i18n.t('团队与视野')}}</span>
+        </h5>
+
+        <div
+            class="row"
+            onclick="(function() { window.location.href = '/advantage' + '?lang={{lang}}' })()"
+        >
+            <div
+                class="col-12 col-lg-3 mb-3 wow fadeInUp clickable"
+                data-wow-delay="500ms"
+            >
+                <div class="media mb-3 flex-item">
+                    <div class="iconfont icon_investment fs-40 fs-sm-70 lh-1"></div>
+                    <p>
+                        <span class="lh-2">{{i18n.t('经验丰富和专业的投资团队')}}</span>
+                    </p>
+                </div>
+            </div>
+            <div
+                class="col-12 col-lg-3 mb-3 wow fadeInUp clickable"
+                data-wow-delay="500ms"
+            >
+                <div class="media mb-3 flex-item">
                     <div class="iconfont icon_shili fs-40 fs-sm-70 lh-1"></div>
-                    <div style="padding: 0 20px">
-                        <h5>深耕投资行业</h5>
-                        <p>
-                            <span class="text-secondary lh-2">目光精准，实力雄厚</span>
-                        </p>
-                    </div>
+                    <p>
+                        <span class="lh-2">{{i18n.t('全球的产业布局和项目来源')}}</span>
+                    </p>
                 </div>
             </div>
-            <div class="col-12 col-lg-4 mb-3 wow fadeInUp" data-wow-delay="500ms">
-                <div class="media mb-3" style="justify-content: center">
-                        <div class="iconfont icon_renmai fs-40 fs-sm-70 lh-1"></div>
-                        <div style="padding: 0 20px">
-                            <h5>行业垂直基金</h5>
-                            <p>
-                                <span class="text-secondary lh-2"
-                                    >资源丰富，人脉广泛</span
-                                >
-                            </p>
-                        </div>
+            <div
+                class="col-12 col-lg-3 mb-3 wow fadeInUp clickable"
+                data-wow-delay="500ms"
+            >
+                <div class="media mb-3 flex-item">
+                    <div class="iconfont icon_renmai fs-40 fs-sm-70 lh-1"></div>
+                    <p>
+                        <span class="lh-2">{{i18n.t('实力雄厚的股东和合作伙伴')}}</span>
+                    </p>
                 </div>
             </div>
-            <div class="col-12 col-lg-4 mb-3 wow fadeInUp" data-wow-delay="500ms">
-                <div class="media mb-3" style="justify-content: center">
-                        <div class="iconfont icon_juece fs-40 fs-sm-70 lh-1"></div>
-                        <div style="padding: 0 20px">
-                            <h5>深悉文化产业</h5>
-                            <p>
-                                <span class="text-secondary lh-2"
-                                    >业务多元，决策高效</span
-                                >
-                            </p>
-                        </div>
+            <div
+                class="col-12 col-lg-3 mb-3 wow fadeInUp clickable"
+                data-wow-delay="500ms"
+            >
+                <div class="media mb-3 flex-item">
+                    <div class="iconfont icon_juece fs-40 fs-sm-70 lh-1"></div>
+                    <p>
+                        <span class="lh-2">{{i18n.t('多元化和跨市场的退出机会')}}</span>
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-{# 团队介绍 #}
+{# 控股与被投企业 #}
 <div class="bg-white py-5">
     <div class="container content">
-        <div class="text-center fs-26 fs-sm-28 wow fadeInDown">
-            <strong><span class="primary">团队</span>介绍</strong>
+        <div class="text-center fs-26 fs-sm-28 mb-5 wow fadeInDown">
+            <strong>{{i18n.t('控股与被投企业')}}</strong>
         </div>
-        <div
+        <!-- <div
             class="text-center fs-14 fs-sm-12 mb-5 text-secondary wow fadeInUp"
             data-wow-delay="1s"
         >
-            TEAM
-        </div>
+            Holding and invested enterprises
+        </div> -->
         <div class="row">
-            {% for team in teams %}
-	    <div class="col-12 col-lg-4 mb-4 pb-4 wow fadeInUp" data-wow-duration="1.5s" onclick="(function() { window.location.href = '/team/{{team.post_id}}' })()">
-                <img
-                    class="img-h-fit"
-                    src="{{JSON.parse(team.options).featuredImage}}"
-                    alt=""
-                />
-                <div class="fs-sm-16 fs-14 lh-sm-2">{{team.title}}</div>
-                <div class="fs-14 fs-sm-12 text-secondary">{{team.summary | safe}}</div>
+            {% for enterprise in enterprises %}
+            <div
+                class="col-12 col-lg-6 mb-4 pb-4 wow fadeInUp clickable"
+                data-wow-duration="1.5s"
+                onclick="(function() { window.location.href = '/enterprise/{{enterprise.post_id}}' + '?lang={{lang}}' })()"
+            >
+                <div style="overflow: hidden">
+                    <img
+                        class="img-h-fit"
+                        src="{{JSON.parse(enterprise.options).featuredImage}}"
+                        alt=""
+                    />
+                </div>
+                <div class="fs-sm-16 fs-14 lh-sm-2">{{enterprise.title}}</div>
+                <div class="fs-14 fs-sm-12 text-secondary text-overflow">
+                    {{enterprise.summary | safe}}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{# 投资方向 #}
+<div class="bg-light py-5">
+    <div class="container content">
+        <div class="text-center fs-26 fs-sm-28 wow fadeInDown">
+            <strong
+                >{{i18n.t('投资')}}<span class="primary"
+                    >{{i18n.t('方向')}}</span
+                ></strong
+            >
+        </div>
+        <!-- <div
+            class="text-center fs-14 fs-sm-12 mb-5 text-secondary wow fadeInUp"
+            data-wow-delay="1s"
+        >
+            Investment Orientation
+        </div> -->
+        <div class="row">
+            {% for investment in investments %}
+            <div
+                class="col-12 col-lg-3 pb-4 wow fadeInUp clickable"
+                data-wow-duration="1.5s"
+                onclick="(function() { window.location.href = '/investment/{{investment.post_id}}' + '?lang={{lang}}' })()"
+            >
+                <div class="fs-sm-16 fs-14 lh-sm-2">{{investment.title}}</div>
+                <div
+                    class="fs-14 fs-sm-12 text-secondary"
+                    style="
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    "
+                >
+                    {{investment.summary | safe}}
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -142,47 +210,78 @@
 </div>
 
 {# 公益事业 #}
-<div class="bg-light py-5">
+<div class="bg-white py-5">
     <div class="container content">
         <div class="text-center fs-26 fs-sm-28 wow fadeInDown">
-            <strong>公益<span class="primary">事业</span></strong>
+            <strong
+                >{{i18n.t('公益')}}<span class="primary"
+                    >{{i18n.t('事业')}}</span
+                ></strong
+            >
         </div>
-        <div
+        <!-- <div
             class="text-center fs-14 fs-sm-12 mb-5 text-secondary wow fadeInUp"
             data-wow-delay="1s"
         >
             PUBLIC WELFARE
-        </div>
-        <div class="row" onClick="(function() {window.location.href = '/public'})()">
-            <div class="col-12 col-lg-3 mb-3 wow fadeInUp" data-wow-duration="500ms">
-                <div class="media mb-3" style="justify-content: center; align-items: center;">
+        </div> -->
+        <div
+            class="row"
+            onclick="(function() {window.location.href = '/public/' + '?lang={{lang}}'})()"
+        >
+            <div
+                class="col-12 col-lg-3 mb-3 wow fadeInUp clickable"
+                data-wow-duration="500ms"
+            >
+                <div
+                    class="media mb-3"
+                    style="justify-content: center; align-items: center"
+                >
                     <div class="iconfont icon_edu fs-40 fs-sm-70 lh-1"></div>
                     <div style="padding: 0 20px">
-                        <h5>教育资助类公益</h5>
+                        <h5>{{i18n.t('教育资助类公益')}}</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-3 mb-3 wow fadeInUp" data-wow-duration="500ms">
-                <div class="media mb-3" style="justify-content: center; align-items: center;">
+            <div
+                class="col-12 col-lg-3 mb-3 wow fadeInUp clickable"
+                data-wow-duration="500ms"
+            >
+                <div
+                    class="media mb-3"
+                    style="justify-content: center; align-items: center"
+                >
                     <div class="iconfont icon_talents fs-40 fs-sm-70 lh-1"></div>
                     <div style="padding: 0 20px">
-                        <h5>人才建设类公益</h5>
+                        <h5>{{i18n.t('人才建设类公益')}}</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-3 mb-3 wow fadeInUp" data-wow-duration="500ms">
-                <div class="media mb-3" style="justify-content: center; align-items: center;">
+            <div
+                class="col-12 col-lg-3 mb-3 wow fadeInUp clickable"
+                data-wow-duration="500ms"
+            >
+                <div
+                    class="media mb-3"
+                    style="justify-content: center; align-items: center"
+                >
                     <div class="iconfont icon_protect fs-40 fs-sm-70 lh-1"></div>
                     <div style="padding: 0 20px">
-                        <h5>女性维权类公益</h5>
+                        <h5>{{i18n.t('女性维权类公益')}}</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-lg-3 mb-3 wow fadeInUp" data-wow-duration="500ms">
-                <div class="media mb-3" style="justify-content: center; align-items: center;">
+            <div
+                class="col-12 col-lg-3 mb-3 wow fadeInUp clickable"
+                data-wow-duration="500ms"
+            >
+                <div
+                    class="media mb-3"
+                    style="justify-content: center; align-items: center"
+                >
                     <div class="iconfont icon_medical fs-40 fs-sm-70 lh-1"></div>
                     <div style="padding: 0 20px">
-                        <h5>医疗健康类公益</h5>
+                        <h5>{{i18n.t('医疗健康类公益')}}</h5>
                     </div>
                 </div>
             </div>

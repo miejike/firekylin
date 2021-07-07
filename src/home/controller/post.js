@@ -4,9 +4,7 @@ const Base = require('./base');
 
 const stats = think.promisify(fs.stat);
 
-module.exports = class extends (
-    Base
-) {
+module.exports = class extends Base {
     /**
      * index action
      * @return {[type]} [description]
@@ -29,10 +27,13 @@ module.exports = class extends (
         // });
         let cateModel = this.model('cate');
         let postModel = this.model('post');
-        let { id } = await cateModel.getCateByName('team');
-        let teams = await postModel.getPostByCate(id);
+        let { id: eId } = await cateModel.getCateByName('enterprise');
+        let enterprises = await postModel.getPostByCate(eId);
+        let { id: tId } = await cateModel.getCateByName('investment');
+        let investments = await postModel.getPostByCate(tId);
 
-        this.assign('teams', teams);
+        this.assign('enterprises', enterprises);
+        this.assign('investments', investments);
         return this.displayView('index');
     }
     /**
@@ -177,10 +178,9 @@ module.exports = class extends (
         let cateModel = this.model('cate');
         let postModel = this.model('post');
         let { id } = await cateModel.getCateByName('advantage');
-        let { content, options } = await postModel.getFirstPostByCate(id);
+        let advantages = await postModel.getPostByCate(id);
 
-        this.assign('content', content);
-        this.assign('options', options);
+        this.assign('advantages', advantages);
         return this.displayView('advantage');
     }
 
@@ -190,7 +190,7 @@ module.exports = class extends (
     async publicAction() {
         let pathname = this.get('pathname');
         let postModel = this.model('post');
-        
+
         if (!pathname) {
             let cateModel = this.model('cate');
             let { id } = await cateModel.getCateByName('public');
@@ -226,6 +226,41 @@ module.exports = class extends (
 
         this.assign('team', team);
         return this.displayView('team');
+    }
+
+    /**
+     * 控股与被投企业页面
+     */
+    async enterpriseAction() {
+        let pathname = this.get('pathname');
+        let postModel = this.model('post');
+
+        if (!pathname) {
+            let cateModel = this.model('cate');
+            let { id } = await cateModel.getCateByName('enterprise');
+            let enterprises = await postModel.getPostByCate(id);
+
+            this.assign('enterprises', enterprises);
+            return this.displayView('enterpriselist');
+        }
+
+        let enterprise = await postModel.getPostById(pathname);
+
+        this.assign('enterprise', enterprise);
+        return this.displayView('enterprise');
+    }
+
+    /**
+     * 投资方向页面
+     */
+    async investmentAction() {
+        let cateModel = this.model('cate');
+        let postModel = this.model('post');
+        let { id } = await cateModel.getCateByName('investment');
+        let investments = await postModel.getPostByCate(id);
+
+        this.assign('investments', investments);
+        return this.displayView('investment');
     }
 
     async newsAction() {

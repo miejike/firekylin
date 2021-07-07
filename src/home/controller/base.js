@@ -13,9 +13,7 @@ i18next.init({
         zh: { translation: require('../../i18n/zh.json') },
     },
 });
-module.exports = class extends (
-    think.Controller
-) {
+module.exports = class extends think.Controller {
     constructor(...args) {
         super(...args);
         //home view path
@@ -33,7 +31,9 @@ module.exports = class extends (
         }
 
         // 初始化国际化信息
-        i18next.changeLanguage(this.get('lang') || 'zh');
+        const lang = this.get('lang') || 'zh';
+
+        i18next.changeLanguage(lang);
 
         let model = this.model('options');
         let cateModel = this.model('cate');
@@ -61,6 +61,7 @@ module.exports = class extends (
         } catch (e) {
             commentConfigName = {};
         }
+        this.assign('lang', lang);
         this.assign('i18n', i18next);
         this.assign('options', options);
         this.assign('navigation', navigation);

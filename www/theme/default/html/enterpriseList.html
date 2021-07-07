@@ -1,16 +1,16 @@
 {% extends './comm/main.html' %} {% block content %}
 <h2 class="fs-sm-30 fs-14 mb-4 pb-4 border-bottom-solid">{{section_name}}</h2>
 <div class="content fs-14">
-    {% for team in teams %}
-    <a href="/team/{{team.post_id}}">
+    {% for enterprise in enterprises %}
+    <a href="/enterprise/{{enterprise.post_id}}?lang={{lang}}">
     <div class="row mb-4 pb-4 border-bottom-solid wow {{ "fadeInRight" if loop.index % 2 !== 0 else "fadeInLeft" }}"  data-wow-duration="1.5s">
         
             <div class="col-12 col-lg-3">
-                <img class="img-fit" src="{{JSON.parse(team.options).featuredImage}}" alt="" />
+                <img class="img-fit" src="{{JSON.parse(enterprise.options).featuredImage}}" alt="" />
             </div>
             <div class="col-12 col-lg-9">
-                <div class="fs-sm-24 fs-14">{{team.title}}</div>
-                <div class="fs-14 fs-sm-14 text-secondary">{{team.summary | safe}}</div>
+                <div class="fs-sm-24 fs-14">{{enterprise.title}}</div>
+                <div class="fs-14 fs-sm-14 text-secondary">{{enterprise.summary | safe}}</div>
             </div>
     </div>
     </a>

@@ -43,7 +43,7 @@
         <nav class="navbar navbar-light bg-light navbar-expand-lg shadow-sm">
             
             <div class="container">
-                <a class="navbar-brand my-1" href="/">
+                <a class="navbar-brand" href="/">
                     <img src="{{options.logo_url|default('/static/img/firekylin.jpg')}}" class="logo-sm-height" height="50">
                 </a>
 
@@ -53,10 +53,10 @@
                 </button>
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav" style="align-items: center;">
                         {% for nav in navigation %}
                         <li class="nav-item {{" active" if currentUrl===nav.option}}">
-                            <a class="nav-link" href="{{nav.url}}" title="{{nav.label}}">{{nav.label}}</a>
+                            <a class="nav-link" href="{{nav.url + '?lang=' + lang}}" title="{{nav.label}}">{{i18n.t(nav.label)}}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -74,7 +74,7 @@
                 <div class="col-12 col-lg-2 mb-3 wow fs-sm-30">
                     <div class="main-title h-sm-180px h-60px">
                         <div class="main-title__border"></div>
-                        <span>{{section_name}}</span>
+                        <span >{{options.title}}</span>
                     </div>
                 </div>
                 <div class="col-12 col-lg-10 my-4 fs-24">

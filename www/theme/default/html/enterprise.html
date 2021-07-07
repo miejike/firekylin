@@ -1,0 +1,15 @@
+{% extends './comm/layout.html' %} {% block content %} {% include './comm/top.html' %}
+
+<div class="container pages">
+    <div class="fs-sm-24 fs-14 py-4 text-center">{{enterprise.title}}</div>
+    <div class="mb-4 text-center">
+        <img
+            class="content-image content-sm-image"
+            src="{{JSON.parse(enterprise.options).featuredImage}}"
+            alt=""
+        />
+    </div>
+    <div class="fs-14 fs-sm-16">{{enterprise.content | safe}}</div>
+</div>
+
+{% endblock %}
