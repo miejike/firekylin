@@ -241,7 +241,7 @@ module.exports = class extends Base {
             let enterprises = await postModel.getPostByCate(id);
 
             this.assign('enterprises', enterprises);
-            return this.displayView('enterpriselist');
+            return this.displayView('enterpriseList');
         }
 
         let enterprise = await postModel.getPostById(pathname);
