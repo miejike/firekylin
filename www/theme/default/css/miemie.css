@@ -91,6 +91,7 @@ ul {
     position: relative;
 }
 .main-title span {
+    width: 80px;
     position: absolute;
     line-height: 40px;
     top: 50%;
