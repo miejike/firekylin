@@ -97,6 +97,7 @@ ul {
     top: 50%;
     margin-top: -20px;
     background: #ffffff;
+    word-break: keep-all;
 }
 .main-title .main-title__border {
     display: block;
