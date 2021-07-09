@@ -7,7 +7,7 @@
     <meta name="keywords" content="{{options.keywords}}">
     <meta name="description" content="{{options.description}}">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,shrink-to-fit=no">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_2352924_b8tuh7ume.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2352924_enztxrunpfb.css">
     <link rel="stylesheet" href="/theme/{{options.theme}}/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/theme/{{options.theme}}/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/theme/{{options.theme}}/css/miemie.css?v=v1.3.5">
@@ -41,12 +41,22 @@
             </button>
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav" style="align-items: center;">
+                <ul class="navbar-nav">
                     {% for nav in navigation %}
                     <li class="nav-item {{" active" if currentUrl===nav.option}}">
                         <a class="nav-link" href="{{nav.url + '?lang=' + lang}}" title="{{nav.label}}">{{i18n.t(nav.label)}}</a>
                     </li>
                     {% endfor %}
+                    <li id="lang-menu" class="dropdown">
+                        <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                          <span class="iconfont icon_lang fs-20" style="line-height: 36px;"></span>
+                          <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="drop3">
+                            <li><a class="nav-link" href="javascript:void(0)" onclick="(function() { window.location.href = window.location.origin + window.location.pathname + '?lang=zh' })()" >中文</a></li>
+                            <li><a class="nav-link" href="javascript:void(0)" onclick="(function() { window.location.href = window.location.origin + window.location.pathname + '?lang=en' })()" >ENGLISH</a></li>
+                        </ul>
+                      </li>
                 </ul>
 
                 {# <span class="navbar-text">

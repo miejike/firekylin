@@ -363,6 +363,15 @@ a.page-num:hover,
     z-index: 10;
 }
 
+#navbarNav .navbar-nav {
+    align-items: center;
+}
+
+#lang-menu .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
 @media only screen and (max-width: 768px) {
     .view .swiper-slide {
         height: 200px;
@@ -374,6 +383,14 @@ a.page-num:hover,
     .view .arrow-right {
         height: 200px;
         display: block;
+    }
+    #navbarNav .navbar-nav {
+        align-items: flex-start;
+    }
+
+    #lang-menu {
+        padding-right: 1.2rem;
+        padding-left: 1.2rem;
     }
 }
 /*在线客服*/
