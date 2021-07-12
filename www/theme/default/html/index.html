@@ -146,19 +146,28 @@
         <div class="row">
             {% for enterprise in enterprises %}
             <div
-                class="col-12 col-lg-6 mb-4 pb-4 wow fadeInUp clickable"
+                class="col-12 col-lg-3 pb-4 wow fadeInUp clickable"
                 data-wow-duration="1.5s"
                 onclick="(function() { window.location.href = '/enterprise/{{enterprise.post_id}}' + '?lang={{lang}}' })()"
             >
-                <div style="overflow: hidden">
+                <!-- <div style="overflow: hidden">
                     <img
                         class="img-h-fit"
                         src="{{JSON.parse(enterprise.options).featuredImage}}"
                         alt=""
                     />
-                </div>
+                </div> -->
                 <div class="fs-sm-16 fs-14 lh-sm-2">{{enterprise.title}}</div>
-                <div class="fs-14 fs-sm-12 text-secondary text-overflow">
+                <div
+                    class="fs-14 fs-sm-12 text-secondary"
+                    style="
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                    "
+                >
                     {{enterprise.summary | safe}}
                 </div>
             </div>
